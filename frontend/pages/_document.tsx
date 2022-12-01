@@ -6,7 +6,9 @@ export default function Document() {
       <Head />
       <body
         style={{
-          backgroundColor: "#f1faee",
+          // backgroundColor: "#f1faee",
+          backgroundImage:
+            "linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%)",
         }}
       >
         <Main />
