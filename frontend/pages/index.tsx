@@ -1,10 +1,9 @@
 import Head from "next/head";
-import Image from "next/image";
 
 import { ethers, BigNumber } from "ethers";
-import { SequencerProvider, ec, Account, transaction } from "starknet";
+import { SequencerProvider } from "starknet";
 import { useState } from "react";
-import { useAccount, useProvider, useSigner } from "wagmi";
+import { useProvider } from "wagmi";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 import {
@@ -19,11 +18,8 @@ import {
   HStack,
   Input,
   Link,
-  List,
-  ListItem,
   Select,
   Text,
-  UnorderedList,
   VStack,
 } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
@@ -34,8 +30,6 @@ import AuthVerifierABI from "../abi/contract";
 import StarknetHackAccountABI from "../abi/StarknetHackAccount";
 
 export default function Home() {
-  const { address: userAddress } = useAccount();
-  const { data: signer } = useSigner();
   const provider = useProvider();
 
   const [proof, setProof] = useState(2);
