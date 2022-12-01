@@ -443,7 +443,11 @@ const CustomInput = (props) => (
 );
 
 const CustomFormLabel = (props) => (
-  <FormLabel fontSize="sm" textTransform="uppercase" {...props} />
+  <FormLabel
+    fontSize="sm"
+    // textTransform="uppercase"
+    {...props}
+  />
 );
 
 const CustomFormControl = (props) => (
