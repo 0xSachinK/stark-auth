@@ -45,8 +45,7 @@ export default function Home() {
   const L1_VERIFIER_CONTRACT = "0xE6db874521e1cd7C06447af614A886A61661594E"; // goerli 2
   const NETWORK_BASE_URL = "https://alpha4-2.starknet.io";
 
-  const L1_PRIVATE_KEY =
-    "36d0c8a377dc579f606e827d97cbb4326860eebc531099bb7f2c95d2c9d26e43";
+  const L1_PRIVATE_KEY = process.env.NEXT_PUBLIC_L1_PRIVATE_KEY; // TODO: set your private key
   const TRANSFER_SELECTOR =
     "232670485425082704932579856502088130646006032362877466777181098476241604910"; // selector for transfer"
 

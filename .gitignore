@@ -8,3 +8,4 @@ l2/build/
 l2/.protostar_cache
 .DS_Store
 ptau-files/powersOfTau28_hez_final_17.ptau
+frontend/.env
