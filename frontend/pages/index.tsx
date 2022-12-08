@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 import { ethers, BigNumber } from "ethers";
-import { SequencerProvider } from "starknet";
+import { Account, ec, SequencerProvider } from "starknet";
 import { useState } from "react";
 import { useProvider } from "wagmi";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
@@ -45,7 +45,7 @@ export default function Home() {
   const L1_VERIFIER_CONTRACT = "0xE6db874521e1cd7C06447af614A886A61661594E"; // goerli 2
   const NETWORK_BASE_URL = "https://alpha4-2.starknet.io";
 
-  const L1_PRIVATE_KEY = process.env.NEXT_PUBLIC_L1_PRIVATE_KEY; // TODO: set your private key
+  const L1_PRIVATE_KEY = process.env.L1_RELAYER_PRIVATE_KEY; // TODO: set your private key
   const TRANSFER_SELECTOR =
     "232670485425082704932579856502088130646006032362877466777181098476241604910"; // selector for transfer"
 
@@ -84,8 +84,18 @@ export default function Home() {
       const provider = new SequencerProvider({
         baseUrl: NETWORK_BASE_URL,
       });
-      const deployment = await provider.deployContract({
-        contract: StarknetHackAccountABI as any,
+      const accountContractClassHash = '0x06324283e4063dfa4b0e17abd414b3e32da93aaf8c41894c25d55902d47ab0d5'
+      const accountAddress = process.env.STARKNET_DEPLOYER_ACCOUNT_CONTRACT_ADDRESS
+      const privateKey = process.env.STARKNET_DEPLOYER_ACCOUNT_PRIVATE_KEY 
+      const keyPair = ec.getKeyPair(privateKey as string)
+      const account = new Account(
+        provider, 
+        accountAddress as string,
+        keyPair
+      )
+      const deployment = await account.deployContract({
+        classHash: accountContractClassHash,
+        // contract: StarknetHackAccountABI as any,
         constructorCalldata: [
           credentialHash,
           BigNumber.from(L1_VERIFIER_CONTRACT).toString(),
